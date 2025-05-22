@@ -4,7 +4,6 @@ import com.caiocaminha.javadailyexpenses.core.domain.enums.Category;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 public record TransactionDetails(
