@@ -1,4 +1,4 @@
-package com.caiocaminha.javadailyexpenses.core.gateway.r2dbc.entities;
+package com.caiocaminha.javadailyexpenses.core.application.gateway.r2dbc.entities;
 
 import org.springframework.data.relational.core.mapping.Table;
 

@@ -1,4 +1,4 @@
-package com.caiocaminha.javadailyexpenses.core.gateway.r2dbc;
+package com.caiocaminha.javadailyexpenses.core.application.gateway.r2dbc;
 
 import com.caiocaminha.javadailyexpenses.core.domain.entities.UserDetails;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
