@@ -7,6 +7,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/v1/transactions")
 public class TransactionController {
 
+    private
+
+    public TransactionController() {
+
+    }
+
 
 
     @PostMapping("/statement")
