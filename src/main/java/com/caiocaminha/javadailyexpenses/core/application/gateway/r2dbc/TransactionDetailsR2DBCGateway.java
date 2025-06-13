@@ -23,7 +23,7 @@ public class TransactionDetailsR2DBCGateway implements TransactionDetailsPort {
         this.r2dbcEntityTemplate = r2dbcEntityTemplate;
     }
 
-
+    //TODO - Finish R2DBC Implementation creating entities, repositories and gateways
 
     @Override
     public TransactionDetails findByUserId(UUID userId) {

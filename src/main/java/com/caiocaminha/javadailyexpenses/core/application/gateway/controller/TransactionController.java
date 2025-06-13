@@ -1,5 +1,6 @@
 package com.caiocaminha.javadailyexpenses.core.application.gateway.controller;
 
+import com.caiocaminha.javadailyexpenses.core.usecase.CreateTransactionUseCase;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,10 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/v1/transactions")
 public class TransactionController {
 
-    private
+    private CreateTransactionUseCase createTransactionUseCase;
 
-    public TransactionController() {
-
+    public TransactionController(CreateTransactionUseCase createTransactionUseCase) {
+        this.createTransactionUseCase = createTransactionUseCase;
     }
 
 

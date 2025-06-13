@@ -1,10 +1,15 @@
 package com.caiocaminha.javadailyexpenses.core.application.gateway.r2dbc.entities;
 
+import com.caiocaminha.javadailyexpenses.core.application.gateway.r2dbc.utils.PersistableEntity;
 import com.caiocaminha.javadailyexpenses.core.domain.entities.TransactionDetails;
 import com.caiocaminha.javadailyexpenses.core.domain.enums.Category;
+import com.google.cloud.Timestamp;
 import jakarta.annotation.Nullable;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import java.time.LocalDate;
@@ -13,7 +18,7 @@ import java.util.UUID;
 
 @Data
 @Table("transaction_details")
-public class TransactionDetailsEntity {
+public class TransactionDetailsEntity extends PersistableEntity<String> {
     @Id
     private String id = UUID.randomUUID().toString();
     @Column("user_id")
@@ -29,9 +34,12 @@ public class TransactionDetailsEntity {
     @Column("paid_by")
     @Nullable
     private String paidBy;
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = this.createdAt;
+    @Column("created_at")
+    private Timestamp createdAt = Timestamp.now();
+    @Column("updated_at")
+    private Timestamp updatedAt = this.createdAt;
 
+    @PersistenceCreator
     public TransactionDetailsEntity(
             UUID userId,
             String details,
