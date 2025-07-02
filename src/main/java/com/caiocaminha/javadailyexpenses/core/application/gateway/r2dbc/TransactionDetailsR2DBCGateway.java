@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class TransactionDetailsR2DBCGateway implements TransactionDetailsPort {
 
     private TransactionDetailsRepository transactionDetailsRepository;
