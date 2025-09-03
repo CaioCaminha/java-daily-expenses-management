@@ -8,9 +8,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import java.util.concurrent.locks.ReentrantLock;
 
 @SpringBootApplication
+@EnableConfigurationProperties({R2DBCProperties.class})
 public class JavaDailyExpensesApplication {
 
-    //todo Configure basic setup with R2DBC using postgres configuration and liquibase setup
+    //todo Evaluate the best database for this application's usecase - Probably mongo hosted or not
 
     public static void main(String[] args) {
         SpringApplication.run(JavaDailyExpensesApplication.class, args);
