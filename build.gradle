@@ -26,15 +26,20 @@ dependencies {
 //     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter'
+// 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.liquibase:liquibase-core'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+// 	Undertow Dependencies
+// 	implementation 'io.undertow:undertow-core:2.3.19.Final'
+
 	// Cloud SQL Dependencies
     implementation 'com.google.cloud:spring-cloud-gcp-starter-sql-postgres-r2dbc:3.2.1'
+
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 }
 
 tasks.named('test') {

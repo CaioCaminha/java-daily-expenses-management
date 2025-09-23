@@ -65,8 +65,8 @@ public class TransactionDetailsEntity extends PersistableEntity<String> {
                 this.cost,
                 this.date,
                 this.paidBy,
-                this.createdAt,
-                this.updatedAt
+                this.createdAt.toSqlTimestamp().toLocalDateTime(),
+                this.updatedAt.toSqlTimestamp().toLocalDateTime()
         );
     }
 
