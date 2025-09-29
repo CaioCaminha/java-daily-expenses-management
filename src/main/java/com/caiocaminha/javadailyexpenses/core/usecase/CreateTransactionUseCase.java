@@ -20,11 +20,11 @@ public class CreateTransactionUseCase {
         this.transactionDetailsPort = transactionDetailsPort;
     }
 
-    public List<TransactionDetails> executeForMultipartFile(
-            MultipartFile multipartFile
-    ) {
-
-    }
+//    public List<TransactionDetails> executeForMultipartFile(
+//            MultipartFile multipartFile
+//    ) {
+//
+//    }
 
     public void execute() {
         transactionDetailsPort.upsert(

@@ -1,14 +1,18 @@
 package com.caiocaminha.javadailyexpenses.core.application.gateway.api.openai;
 
 import com.caiocaminha.javadailyexpenses.core.domain.entities.TransactionDetails;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Set;
 
-public class OpenAIGateway {
+public class OpenAIClientGateway {
     private final OpenAiHttpClient httpClient;
     private final OpenAiClientProperties properties;
 
-    public OpenAIGateway(
+    @Value("${open-api.apiKey}")
+    private String apiKey;
+
+    public OpenAIClientGateway(
             OpenAiHttpClient httpClient,
             OpenAiClientProperties properties
     ) {
