@@ -22,8 +22,11 @@ import java.util.Optional;
 @Configuration
 public class OpenAiWebClientConfig {
 
-    @Value("${client.openai.baseUrl}")
-    private String openAiBaseUrl;
+    @Value("${client.api-key.open-ai}")
+    private String apiKey;
+
+    @Value("${client.base-url.open-ai}")
+    private String baseUrl;
 
     public static final String OPENAI_WEBCLIENT_QUALIFIER = "OPENAI_WEBCLIENT_QUALIFIER";
     public static final String GOOGLE_SHEETS_WEBCLIENT_QUALIFIER = "GOOGLE_SHEETS_WEBCLIENT_QUALIFIER";
@@ -58,7 +61,7 @@ public class OpenAiWebClientConfig {
                     .build());
         }));
         return webClientBuilder.build(
-                openAiBaseUrl,
+                baseUrl,
                 Optional.of(filters),
                 Optional.empty(),
                 httpClient(),

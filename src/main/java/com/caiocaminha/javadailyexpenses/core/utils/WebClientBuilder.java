@@ -3,6 +3,7 @@ package com.caiocaminha.javadailyexpenses.core.utils;
 import org.apache.logging.slf4j.MDCContextMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.codec.ClientCodecConfigurer;
@@ -11,12 +12,13 @@ import org.springframework.web.util.UriBuilderFactory;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.resources.ConnectionProvider;
 import reactor.netty.transport.ProxyProvider;
-
 import javax.swing.text.html.Option;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static com.caiocaminha.javadailyexpenses.core.utils.LoggerUtils.logInfo;
 
 
 @Configuration
@@ -26,8 +28,6 @@ public class WebClientBuilder {
 
     private final int maxMemory = 12 * 1024;
     private final int byteSize = 1024;
-
-    private Logger logger = LoggerFactory.getLogger(WebClientBuilder.class);
 
 
     public HttpClient httpClient(
@@ -65,7 +65,7 @@ public class WebClientBuilder {
                 .codecs(codec -> codec.defaultCodecs().maxInMemorySize(maxMemory * byteSize))
                 .codecs(codecConfigurer)
                 .filters(
-                        (filter) -> {
+                        filter -> {
                             changeUrlFilters.ifPresent(filter::addAll);
                             filters.ifPresent(filter::addAll);
                             filter.add(logResponseFilter());
@@ -78,8 +78,7 @@ public class WebClientBuilder {
 
         //todo Log Response - Not sure how to do this in Java
         return (request, next) -> {
-            logger.info(request.headers().toString());
-
+            logInfo("Message");
             return next.exchange(request).single();
         };
     }

@@ -1,0 +1,30 @@
+spring:
+  main:
+    #To ensure that JVM is kept alive even though all running threads are virtual threads
+    #Virtual threads are created as deamon threads, and the JVM will exit if all threads are deamon threads
+    keep-alive: true
+  application:
+    name: java-daily-expenses-orchestrator
+  datasource:
+    url: ${db.config.url}
+    username: ${db.config.url}
+    password: ${db.config.url}
+  threads:
+    virtual:
+      enabled: true
+
+client:
+  base-url:
+    open-ai: https://api.openai.com
+  api-key:
+    open-ai: randomApiKey
+
+
+db:
+  name: daily-expenses-db
+  user: postgres
+  password: postgres
+  url: jdbc:postgresql://${db.server.host}:${db.server.port}/${db.name}
+  server:
+    port: ${DB_SERVER_PORT:5432}
+    host: ${DB_SERVER_HOST:127.0.0.1}

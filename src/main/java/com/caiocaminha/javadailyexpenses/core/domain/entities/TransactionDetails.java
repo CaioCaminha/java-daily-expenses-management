@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record TransactionDetails(
-        UUID id,
+        String id,
         UUID userId,
         Category category,
         String details,
@@ -17,4 +17,10 @@ public record TransactionDetails(
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 ) {
+
+    public TransactionDetails {
+        id = String.valueOf((userId.toString() + details + cost + transactionDate).hashCode());
+        updatedAt = createdAt; // at construction the updatedAt should be equals to createdAt
+    }
+
 }
