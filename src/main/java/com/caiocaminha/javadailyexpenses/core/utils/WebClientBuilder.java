@@ -9,6 +9,7 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.codec.ClientCodecConfigurer;
 import org.springframework.web.reactive.function.client.*;
 import org.springframework.web.util.UriBuilderFactory;
+import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.resources.ConnectionProvider;
 import reactor.netty.transport.ProxyProvider;
@@ -74,13 +75,16 @@ public class WebClientBuilder {
                 .build();
     }
 
+    /**
+     * Returns ExchangeFilterFunction that logs the response body
+     * @return
+     */
     private ExchangeFilterFunction logResponseFilter() {
-
-        //todo Log Response - Not sure how to do this in Java
-        return (request, next) -> {
-            logInfo("Message");
-            return next.exchange(request).single();
-        };
+        return (request, next) -> next.exchange(request)
+                .flatMap(response -> response.bodyToMono(String.class)
+                        .doOnNext(LoggerUtils::logInfo) //method reference that receives the String body
+                        .then(Mono.just(response))
+                );
     }
 
 
