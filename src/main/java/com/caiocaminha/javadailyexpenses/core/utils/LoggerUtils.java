@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class LoggerUtils {
@@ -14,6 +15,20 @@ public class LoggerUtils {
             String message
     ) {
         logger.info(message);
+    }
+
+    public static <T extends Class> void logError(
+            String message,
+            Optional<Throwable> exception
+    ) {
+        exception.ifPresentOrElse(
+                e -> {
+                    logger.error("%s | %s".formatted(message, e.getMessage()));
+                },
+                () -> {
+                    logger.error(message);
+                }
+        );
     }
 
     public static <T> void log(
