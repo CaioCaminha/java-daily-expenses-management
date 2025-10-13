@@ -7,10 +7,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record TransactionDetails(
-        String id,
+        UUID id,
+        String hash,
         UUID userId,
         Category category,
-        String details,
+        DescriptionDetails descriptionDetails,
         Double cost,
         LocalDate transactionDate,
         String paidBy,
@@ -18,8 +19,18 @@ public record TransactionDetails(
         LocalDateTime updatedAt
 ) {
 
-    public TransactionDetails {
-        id = String.valueOf((userId.toString() + details + cost + transactionDate).hashCode());
+    //todo Not sure this constructor signature it's working
+    public TransactionDetails(
+            UUID userId,
+            Category category,
+            String description,
+            Double cost,
+            LocalDate transactionDate,
+            String paidBy,
+            LocalDateTime createdAt
+    ) {
+        id = UUID.randomUUID();
+        hash = String.valueOf((userId.toString() + descriptionDetails.description() + cost + transactionDate).hashCode());
         updatedAt = createdAt; // at construction the updatedAt should be equals to createdAt
     }
 

@@ -1,12 +1,20 @@
-# Java Daily-Expenses Manager
+# Java Daily-Expenses Orchestrator
+
+
+## Performance Evaluation
+Evaluate performance of this application and create reports to be compared with a similar application:
+ - Written in another cloud native framework such as Micronaut or Quarkus
+ - Written in Kotlin and Spring 
+ - Using a NoSQL database client
+ - Using undertow as Servlet client/server
 
   ### Base Structure Action Items:
 
- - Implement Controller - Start with WebFlux Functional Web Framework - Reducing Annotations overhead ?
  - Implement UseCase and Domain base package with all ports and contracts
- - Finish OpenAI WebClient implementation
- - Implement configuration with database - Decide between postgres and mongodb (mongo would probably the easier one, also would be good to study also for work)
+ - Implement Postgres R2DBC Configuration
  - Implement Spring Transaction Manager ( Study Spring Framework transaction management)
+ - Finish OpenAI WebClient implementation 
+ - Implement Controller - Start with WebFlux Functional Web Framework - Reducing Annotations overhead ?
  - Configure TestContainers 
  - Implement Unit and Integration tests
 
@@ -25,9 +33,9 @@
 
  ### Topics to study:
 
+ - Spring IoC Container and Beans
  - [Spring's Task Executor and @Async with virtual threads](https://docs.spring.io/spring-framework/reference/integration/scheduling.html#scheduling-task-executor-types)  - DONE
  - [Emmbracing Virtual Threads - Spring](https://spring.io/blog/2022/10/11/embracing-virtual-threads) - DONE
  - [Java Servlet Technology](https://docs.oracle.com/javaee/5/tutorial/doc/bnafd.html)
  - WebClient / WebFlux Configuration and core concepts
- - Spring IoC Container and Beans
  - Spring Data and Spring Data Mongo

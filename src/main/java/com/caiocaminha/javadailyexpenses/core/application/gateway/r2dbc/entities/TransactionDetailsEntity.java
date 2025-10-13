@@ -1,6 +1,7 @@
 package com.caiocaminha.javadailyexpenses.core.application.gateway.r2dbc.entities;
 
 import com.caiocaminha.javadailyexpenses.core.application.gateway.r2dbc.utils.PersistableEntity;
+import com.caiocaminha.javadailyexpenses.core.domain.entities.DescriptionDetails;
 import com.caiocaminha.javadailyexpenses.core.domain.entities.TransactionDetails;
 import com.caiocaminha.javadailyexpenses.core.domain.enums.Category;
 import com.google.cloud.Timestamp;
@@ -39,6 +40,11 @@ public class TransactionDetailsEntity extends PersistableEntity<String> {
     @Column("updated_at")
     private Timestamp updatedAt = this.createdAt;
 
+    @Override
+    public String getId() {
+        return id;
+    }
+
     @PersistenceCreator
     public TransactionDetailsEntity(
             UUID userId,
@@ -56,18 +62,20 @@ public class TransactionDetailsEntity extends PersistableEntity<String> {
         this.paidBy = paidBy;
     }
 
-    public TransactionDetails toDomain() {
-        return new TransactionDetails(
-                UUID.fromString(this.id),
-                this.userId,
-                this.category,
-                this.details,
-                this.cost,
-                this.date,
-                this.paidBy,
-                this.createdAt.toSqlTimestamp().toLocalDateTime(),
-                this.updatedAt.toSqlTimestamp().toLocalDateTime()
-        );
-    }
+//    public TransactionDetails toDomain() {
+//        return new TransactionDetails(
+//                this.id,
+//                this.userId,
+//                this.category,
+//                new DescriptionDetails(
+//                        this.id, this.details
+//                ),
+//                this.cost,
+//                this.date,
+//                this.paidBy,
+//                this.createdAt.toSqlTimestamp().toLocalDateTime(),
+//                this.updatedAt.toSqlTimestamp().toLocalDateTime()
+//        );
+//    }
 
 }
