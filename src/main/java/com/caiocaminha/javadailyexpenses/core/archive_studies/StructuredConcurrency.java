@@ -1,7 +1,5 @@
 package com.caiocaminha.javadailyexpenses.core.archive_studies;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
 import java.time.LocalDate;
 //import java.util.concurrent.StructuredTaskScope;
 

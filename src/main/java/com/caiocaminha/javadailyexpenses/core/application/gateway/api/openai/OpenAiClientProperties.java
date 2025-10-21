@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 public class OpenAiClientProperties {
-    @Value("${open-api.apiKey}")
+//    @Value("${open-api.apiKey}")
     private String apiKey;
 }

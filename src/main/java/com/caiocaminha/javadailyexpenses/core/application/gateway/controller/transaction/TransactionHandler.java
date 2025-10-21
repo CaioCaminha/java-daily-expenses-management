@@ -1,33 +1,64 @@
 package com.caiocaminha.javadailyexpenses.core.application.gateway.controller.transaction;
 
 import com.caiocaminha.javadailyexpenses.core.domain.entities.TransactionDetails;
+import com.caiocaminha.javadailyexpenses.core.domain.port.DataExtractorPort;
 import com.caiocaminha.javadailyexpenses.core.usecase.CreateTransactionUseCase;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.multipart.FilePartEvent;
 import org.springframework.http.codec.multipart.FormPartEvent;
 import org.springframework.http.codec.multipart.PartEvent;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 @Component
 public class TransactionHandler {
 
-    private CreateTransactionUseCase createTransactionUseCase;
+    private final DataExtractorPort<TransactionDetails> dataExtractorPort;
 
-    public TransactionHandler(CreateTransactionUseCase createTransactionUseCase) {
+    private final CreateTransactionUseCase createTransactionUseCase;
+
+    public TransactionHandler(
+            CreateTransactionUseCase createTransactionUseCase,
+            @Qualifier
+            DataExtractorPort<TransactionDetails> dataExtractorPort
+    ) {
+        this.dataExtractorPort = dataExtractorPort;
         this.createTransactionUseCase = createTransactionUseCase;
     }
 
-//    @Async //response type must be wrapped in a Future
     public Mono<ServerResponse> createTransaction(ServerRequest request) {
+
+
+        //todo Finish Domain and UseCase implementations and move to Spring Data with R2DBC connecting to a
+        // PostgresSQL database
+
+        /**
+         * Example of consuming a Mono without blocking the executing thread
+         * Using flatMap instead of blockOptional or block
+         */
+        request.bodyToMono(InputStream.class)
+                .flatMap((body) -> {
+                    try {
+                        createTransactionUseCase.execute(body);
+                        return ServerResponse.ok().bodyValue(body);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }).onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));
+
+
+
+
+
         var body = request.bodyToMono(TransactionDetails.class).blockOptional();
 
         body.ifPresent(transactionDetails -> {

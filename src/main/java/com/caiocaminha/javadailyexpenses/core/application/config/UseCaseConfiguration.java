@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UseCaseConfiguration {
 
-    @Bean
-    public CreateTransactionUseCase createTransactionUseCase(
-           TransactionDetailsPort transactionDetailsPort
-    ) {
-        return new CreateTransactionUseCase(
-                transactionDetailsPort
-        );
-    }
+//    @Bean
+//    public CreateTransactionUseCase createTransactionUseCase(
+//           TransactionDetailsPort transactionDetailsPort
+//    ) {
+//        return new CreateTransactionUseCase(
+//                transactionDetailsPort
+//        );
+//    }
 
 }
