@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Service
 public interface TransactionDetailsPort {
-    public TransactionDetails findByUserId(UUID userId);
+    TransactionDetails findByUserId(UUID userId);
 
-    public void upsert(TransactionDetails transactionDetails);
+    void upsert(TransactionDetails transactionDetails);
 }
